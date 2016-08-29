@@ -76,7 +76,7 @@ final class LockMyScreen extends Activity {
     DevicePolicyManager policyManager = ( DevicePolicyManager ) getSystemService( Context.DEVICE_POLICY_SERVICE );
 
     if ( policyManager.isAdminActive( adminComponent ) ) {
-      // lockScreen( policyManager );
+      lockScreen( policyManager );
     }
     else {
       requestPermission( adminComponent );
