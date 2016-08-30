@@ -34,6 +34,7 @@
       <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
       <uses-permission android:name="android.permission.WAKE_LOCK" />
       <uses-permission android:name="android.permission.BIND_DEVICE_ADMIN" />
+      <!--
       <application>
         <activity android:name=".LockMyScreen" android:label="LockMyScreen">
           <intent-filter>
@@ -46,6 +47,7 @@
           </intent-filter>
         </activity>
       </application>
+      -->
       <receiver android:label="LockMyScreen" android:name=".LockMyScreen" android:permission="android.permission.BIND_DEVICE_ADMIN">
         <meta-data android:name="android.app.device_admin">
           <device-admin xmlns:android="http://schemas.android.com/apk/res/android">

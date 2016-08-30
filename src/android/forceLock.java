@@ -32,6 +32,8 @@ import org.apache.cordova.PluginResult;
  */
 public class forceLock extends CordovaPlugin {
   boolean myReturn;
+  LockMyScreen myLockScreen;
+  Context myContext;
 
   @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -44,8 +46,7 @@ public class forceLock extends CordovaPlugin {
         public void run() {
             try {
               Context context = cordova.getActivity().getApplicationContext();
-              Intent intent = new Intent(context, LockMyScreen.class);
-              cordova.getActivity().startActivity(intent);
+              LockMyScreen lock = new LockMyScreen(context);
               myCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK));
             }
             catch (Exception e) {
@@ -62,18 +63,19 @@ public class forceLock extends CordovaPlugin {
   }
 }
 
-final class LockMyScreen extends Activity {
+class LockMyScreen {
   private static final int MAX_RETRY_COUNT = 4;
   private static final int RETRY_DELAY = 100;
 
   private static final int REQUEST_CODE_ENABLE_ADMIN = 2;
 
-  @Override
-  protected void onCreate( Bundle aSavedInstanceState ) {
-    super.onCreate( aSavedInstanceState );
+  Context mContext;
 
+  public LockMyScreen(Context mContext) {
+    this.mContext = mContext;
+    
     ComponentName adminComponent = new ComponentName( LockMyScreen.this, PermissionReceiver.class );
-    DevicePolicyManager policyManager = ( DevicePolicyManager ) getSystemService( Context.DEVICE_POLICY_SERVICE );
+    DevicePolicyManager policyManager = ( DevicePolicyManager ) this.mContext.getSystemService( Context.DEVICE_POLICY_SERVICE );
 
     if ( policyManager.isAdminActive( adminComponent ) ) {
       lockScreen( policyManager );
@@ -88,7 +90,7 @@ final class LockMyScreen extends Activity {
     super.onActivityResult( aRequestCode, aResultCode, aData );
 
     if ( aResultCode == RESULT_OK ) {
-      DevicePolicyManager policyManager = ( DevicePolicyManager ) getSystemService( Context.DEVICE_POLICY_SERVICE );
+      DevicePolicyManager policyManager = ( DevicePolicyManager ) this.mContext.getSystemService( Context.DEVICE_POLICY_SERVICE );
       lockScreen( policyManager );
     }
     else {
@@ -97,7 +99,7 @@ final class LockMyScreen extends Activity {
   }
 
   private void lockScreen( final DevicePolicyManager aPolicyManager ) {
-    final PowerManager powerManager = ( PowerManager ) getSystemService( Context.POWER_SERVICE );
+    final PowerManager powerManager = ( PowerManager ) this.mContext.getSystemService( Context.POWER_SERVICE );
     final Handler handler = new Handler( getMainLooper() );
     final int[] retryCount = new int[]{ 0 };
 
