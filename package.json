@@ -1,0 +1,25 @@
+{
+  "name": "forceLock",
+  "version": "0.0.1",
+  "description": "Programatically lock an android phone",
+  "cordova": {
+    "id": "cordova-plugin-force-lock",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adam-hanna/forceLock.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "Adam Hanna",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/adam-hanna/forceLock/issues"
+  },
+  "homepage": "https://github.com/adam-hanna/forceLock#readme"
+}

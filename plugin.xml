@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-force-lock" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+  <name>force-lock</name>
+  <js-module name="forceLock" src="www/forceLock.js">
+    <clobbers target="window.forceLock" />
+  </js-module>
+  <platform name="android">
+    <source-file src="src/android/forceLock.java" target-dir="src/cordova-plugin-force-lock/forceLock" />
+    
+    <config-file parent="/*" target="res/xml/config.xml">
+      <feature name="forceLock">
+        <param name="android-package" value="com.adamhanna.plugin.forceLock" /></feature>
+    </config-file>
+
+    <config-file parent="/*" target="AndroidManifest.xml">
+      <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+      <uses-permission android:name="android.permission.WAKE_LOCK" />
+      <uses-permission android:name="android.permission.BIND_DEVICE_ADMIN" />
+    </config-file>
+
+    <config-file parent="/manifest/application" target="AndroidManifest.xml">
+      <activity android:name="com.adamhanna.plugin.LockMyScreen" android:label="LockMyScreen">
+        <intent-filter>
+            <action android:name="android.intent.action.GET_CONTENT" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+
+        <!--
+        <intent-filter>
+          <action android:name="android.intent.action.MAIN" />
+          <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        -->
+      </activity>
+
+      <receiver android:label="LockMyScreen" android:name="com.adamhanna.plugin.LockMyScreen$PermissionReceiver" android:permission="android.permission.BIND_DEVICE_ADMIN">
+        <meta-data android:name="android.app.device_admin" android:resource="@xml/admin_policies"></meta-data>
+        <intent-filter>
+          <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+        </intent-filter>
+      </receiver>
+
+    </config-file>
+
+    <resource-file src="res/android/xml/admin_policies.xml" target="res/xml/admin_policies.xml" />
+    <!--
+    <source-file src="src/android/forceLock.java" target-dir="src/com/adamhanna/plugin/" />
+  -->
+    <source-file src="src/android/LockMyScreen.java" target-dir="src/com/adamhanna/plugin/" />
+  </platform>
+</plugin>
