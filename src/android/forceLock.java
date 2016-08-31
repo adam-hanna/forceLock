@@ -2,30 +2,18 @@ package com.adamhanna.plugin;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
+import org.apache.cordova.PluginResult;
+import org.apache.cordova.CordovaInterface;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.admin.DeviceAdminReceiver;
-import android.app.admin.DevicePolicyManager;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.PowerManager;
-import android.widget.Toast;
-
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
-import org.apache.cordova.CordovaInterface;
-import org.apache.cordova.PluginResult;
+import android.content.Context;
+import android.content.Intent;
 
 /**
  * This class echoes a string called from JavaScript.

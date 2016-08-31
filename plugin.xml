@@ -25,10 +25,12 @@
             <category android:name="android.intent.category.DEFAULT" />
         </intent-filter>
 
+        <!--
         <intent-filter>
           <action android:name="android.intent.action.MAIN" />
           <category android:name="android.intent.category.DEFAULT" />
         </intent-filter>
+        -->
       </activity>
 
       <receiver android:label="LockMyScreen" android:name="com.adamhanna.plugin.LockMyScreen$PermissionReceiver" android:permission="android.permission.BIND_DEVICE_ADMIN">
@@ -41,5 +43,9 @@
     </config-file>
 
     <resource-file src="res/android/xml/admin_policies.xml" target="res/xml/admin_policies.xml" />
+    <!--
+    <source-file src="src/android/forceLock.java" target-dir="src/com/adamhanna/plugin/" />
+  -->
+    <source-file src="src/android/LockMyScreen.java" target-dir="src/com/adamhanna/plugin/" />
   </platform>
 </plugin>

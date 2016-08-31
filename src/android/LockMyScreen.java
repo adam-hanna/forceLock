@@ -1,3 +1,19 @@
+package com.adamhanna.plugin;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.admin.DeviceAdminReceiver;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.PowerManager;
+import android.widget.Toast;
+
 public class LockMyScreen extends Activity {
   private static final int MAX_RETRY_COUNT = 4;
   private static final int RETRY_DELAY = 100;
